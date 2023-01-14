@@ -953,7 +953,9 @@ def main():
     ###########################################################################
     for token_id in range(start_token_id, end_token_id):
         json_file_path = METADATA_DIR + str(token_id) + ".json"
-        with open(json_file_path, 'r') as metadata_file:
+
+        print(f"Build #{token_id} nft metadata from {json_file_path}")
+        with open(json_file_path, "r") as metadata_file:
             data = json.load(metadata_file)
             try:
                 generate(token_id, data, parts_dir)

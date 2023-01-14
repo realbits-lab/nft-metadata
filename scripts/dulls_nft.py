@@ -1,24 +1,25 @@
 import metadata
 
 ################################################################################
-# For dulls NFT.
+# For Dulls NFT.
 ################################################################################
 
 # Output directory to where all metadata files generated and saved.
 # The tail "/" should be added.
-output_dir = "../build/json/"
+output_dir = "./build/json/"
 
 # Metadata JSON structure
 # https://docs.opensea.io/docs/metadata-standards
-nft_name = "testNFT"
-nft_symbol = "TNT"
-nft_description = "testNFT for realbits"
+nft_name = "Dulls"
+nft_symbol = "DLL"
+nft_description = "Dulls NFT project for realbits"
+
 # The tail "/" should be added.
-nft_image_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/image/"
+nft_image_url = "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/image/"
 # The tail "/" should be added.
-nft_glb_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/glb/"
+nft_glb_url = "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/glb/"
 # The tail "/" should be added.
-nft_vrm_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/vrm/"
+nft_vrm_url = "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/vrm/"
 
 # For background.
 list_background = [
@@ -63,7 +64,8 @@ list_bottom = [
 
 # For body.
 list_body = [
-    "hoodies", "sweater"
+    # "hoodies", "sweater"
+    "hoodies"
 ]
 
 # For body clothes.

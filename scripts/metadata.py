@@ -27,8 +27,15 @@ def generate_metadata(
     ############################################################################
     if path.exists(output_dir) == False:
         print(
-            f"ERROR: Outputs directory does not exist. Set the absolute path to the {output_dir}.")
-        return
+            f"ERROR: Output directory({output_dir}) does not exist. We will make it.")
+        # Make output_dir directory.
+        os.makedirs(output_dir, exist_ok=True)
+
+    ###########################################################################
+    # Remove all files in json output directory.
+    ###########################################################################
+    for f in os.listdir(output_dir):
+        os.remove(os.path.join(output_dir, f))
 
     print("Start generating metadata ...")
 
@@ -96,12 +103,6 @@ def generate_metadata(
                                             background_attribute)
 
                                         content_list.append(attribute)
-
-    ###########################################################################
-    # Remove all files in json output directory.
-    ###########################################################################
-    for f in os.listdir(output_dir):
-        os.remove(os.path.join(output_dir, f))
 
     ###########################################################################
     # Create metadata.

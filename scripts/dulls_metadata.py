@@ -56,7 +56,7 @@ list_middle = [
     "aviator", "cheek", "goggle", "mole", "smart", "thuglife"
 ]
 list_side = [
-    "bigring", "earphones", "headset", "pearlear", "pencil", "piercing"
+    "bigring", "headset", "pearlear", "pencil", "piercing"
 ]
 list_bottom = [
     "bowtie", "candy", "cat", "goldchain", "mask", "mustache", "pearl"

@@ -5,7 +5,7 @@
 
 # Execute python script to generate model
 
-- blender dulls-parts -P scripts/dulls_model.py --background
+- blender -P scripts/dulls_model.py dulls-parts --background
 - blender command is an alias of blender application command.
 - --background option is not to run blender UI.
 - Should keep the order of commnad arguments.

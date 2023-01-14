@@ -900,7 +900,8 @@ def print_all_values(input):
 
 def main():
     # Parts directory containing each directory like "body" or "head" or "misc".
-    parts_dir = sys.argv[1]
+    parts_dir = sys.argv[3]
+    # print("parts_dirs: ", parts_dir)
 
     ###########################################################################
     # Check directory exists.
@@ -957,7 +958,7 @@ def main():
                 print("Error: ", Error)
 
     ###########################################################################
-    # Print log.
+    # Print lmg.
     ###########################################################################
     print("Done.")
 

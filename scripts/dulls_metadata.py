@@ -50,7 +50,7 @@ list_face = [
 
 # For face accessories.
 list_top = [
-    "angel", "devel", "flower", "hairband", "sprout"
+    "angel", "devil", "flower", "hairband", "sprout"
 ]
 list_middle = [
     "aviator", "cheek", "goggle", "mole", "smart", "thuglife"

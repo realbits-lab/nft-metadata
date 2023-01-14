@@ -852,7 +852,7 @@ def generate(id, adict, parts_dir):
     # * ########################################################################
     # * Remove assets.
     # * ########################################################################
-    # remove_assets()
+    remove_assets()
 
     # * ########################################################################
     # * Print log.
@@ -898,7 +898,8 @@ def main():
     # Add the tailing directory mark.
     parts_dir = sys.argv[3] + "/"
     start_token_id = int(sys.argv[4])
-    end_token_id = int(sys.argv[5])
+    # Because range function exclude the last one.
+    end_token_id = int(sys.argv[5]) + 1
     # print("parts_dirs: ", parts_dir)
 
     ###########################################################################

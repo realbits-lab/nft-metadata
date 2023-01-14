@@ -601,10 +601,6 @@ def generate(id, adict, parts_dir):
         raise ValueError("faceObject is None.")
     if hairObject == None:
         raise ValueError("hairObject is None.")
-    if hairArmatureObject == None:
-        raise ValueError("hairArmatureObject is None.")
-    if hairArmatureObject.data == None:
-        raise ValueError("hairArmatureObject.data is None.")
     if bodyArmature == None:
         raise ValueError("bodyArmature is None.")
     if bodyArmatureObject == None:
@@ -612,11 +608,12 @@ def generate(id, adict, parts_dir):
     if bodyArmatureObject.type != "ARMATURE":
         raise ValueError("bodyArmatureObject.type is not ARMATURE.")
 
-    secondary_animation = (
-        hairArmatureObject.data.vrm_addon_extension.vrm0.secondary_animation
-    )
-    for bone_group in secondary_animation.bone_groups:
-        hairBoneGroupArray.append(bone_group)
+    if hairArmatureObject:
+        secondary_animation = (
+            hairArmatureObject.data.vrm_addon_extension.vrm0.secondary_animation
+        )
+        for bone_group in secondary_animation.bone_groups:
+            hairBoneGroupArray.append(bone_group)
 
     # * ########################################################################
     # * Set parent of face with body armature.
@@ -671,13 +668,14 @@ def generate(id, adict, parts_dir):
     # * Join hair armature to body armature.
     # * ########################################################################
 
-    bpy.ops.object.select_all(action="DESELECT")
-    selectedObjects = [bodyArmatureObject, hairArmatureObject]
-    print("-- bodyArmatureObject: ", bodyArmatureObject)
-    print("selectedObjects: ", selectedObjects)
-    with bpy.context.temp_override(active_object=bodyArmatureObject, selected_editable_objects=selectedObjects):
-        bpy.ops.object.join()
-    print("-- bodyArmatureObject: ", bodyArmatureObject)
+    if hairArmatureObject:
+        bpy.ops.object.select_all(action="DESELECT")
+        selectedObjects = [bodyArmatureObject, hairArmatureObject]
+        print("-- bodyArmatureObject: ", bodyArmatureObject)
+        print("selectedObjects: ", selectedObjects)
+        with bpy.context.temp_override(active_object=bodyArmatureObject, selected_editable_objects=selectedObjects):
+            bpy.ops.object.join()
+        print("-- bodyArmatureObject: ", bodyArmatureObject)
 
     # * ########################################################################
     # * Set parent of hair with body armature.

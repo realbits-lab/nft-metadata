@@ -900,7 +900,10 @@ def print_all_values(input):
 
 def main():
     # Parts directory containing each directory like "body" or "head" or "misc".
-    parts_dir = sys.argv[3]
+    # Add the tailing directory mark.
+    parts_dir = sys.argv[3] + "/"
+    start_token_id = int(sys.argv[4])
+    end_token_id = int(sys.argv[5])
     # print("parts_dirs: ", parts_dir)
 
     ###########################################################################
@@ -910,15 +913,19 @@ def main():
         print(
             f"ERROR: Parts directory({parts_dir}) does not exist. Set the parts directory.")
         return
+
     if path.exists(IMAGE_OUTPUTS_DIR) == False:
         print(f"ERROR: Outputs directory({IMAGE_OUTPUTS_DIR}) does not exist.")
-        return
+        os.makedirs(IMAGE_OUTPUTS_DIR, exist_ok=True)
     if path.exists(GLB_OUTPUTS_DIR) == False:
         print(f"ERROR: Outputs directory({GLB_OUTPUTS_DIR}) does not exist.")
-        return
+        os.makedirs(GLB_OUTPUTS_DIR, exist_ok=True)
     if path.exists(VRM_OUTPUTS_DIR) == False:
         print(f"ERROR: Outputs directory({VRM_OUTPUTS_DIR}) does not exist.")
-        return
+        os.makedirs(VRM_OUTPUTS_DIR, exist_ok=True)
+    if path.exists(VIDEO_OUTPUTS_DIR) == False:
+        print(f"ERROR: Outputs directory({VIDEO_OUTPUTS_DIR}) does not exist.")
+        os.makedirs(VIDEO_OUTPUTS_DIR, exist_ok=True)
 
     print("Start generating models...")
 
@@ -948,7 +955,8 @@ def main():
     ###########################################################################
     # Generate models as to metadata.
     ###########################################################################
-    for token_id in range(START_TOKEN_ID, END_TOKEN_ID):
+    # for token_id in range(START_TOKEN_ID, END_TOKEN_ID):
+    for token_id in range(start_token_id, end_token_id):
         json_file_path = METADATA_DIR + str(token_id) + ".json"
         with open(json_file_path, 'r') as metadata_file:
             data = json.load(metadata_file)

@@ -21,11 +21,6 @@ GLB_OUTPUTS_DIR = "./build/glb/"
 VRM_OUTPUTS_DIR = "./build/vrm/"
 BACKGROUND_DIR = "./background/"
 
-# Token ID range.
-TOTAL_TOKEN_COUNT = 1
-START_TOKEN_ID = 1
-END_TOKEN_ID = TOTAL_TOKEN_COUNT + START_TOKEN_ID
-
 # Define trait type list.
 TRAIT_TYPE_LIST = ["background", "face", "body", "body_top",
                    "body_bottom", "hair", "top", "side", "middle", "bottom"]
@@ -955,7 +950,6 @@ def main():
     ###########################################################################
     # Generate models as to metadata.
     ###########################################################################
-    # for token_id in range(START_TOKEN_ID, END_TOKEN_ID):
     for token_id in range(start_token_id, end_token_id):
         json_file_path = METADATA_DIR + str(token_id) + ".json"
         with open(json_file_path, 'r') as metadata_file:

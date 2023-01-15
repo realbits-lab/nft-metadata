@@ -599,8 +599,6 @@ def generate(id, adict, parts_dir):
             "humanoid.all_required_bones_are_assigned() is False.")
     if faceObject == None:
         raise ValueError("faceObject is None.")
-    if hairObject == None:
-        raise ValueError("hairObject is None.")
     if bodyArmature == None:
         raise ValueError("bodyArmature is None.")
     if bodyArmatureObject == None:

@@ -957,7 +957,7 @@ def main():
     # Generate models as to metadata.
     ###########################################################################
     for token_id in range(start_token_id, end_token_id):
-        json_file_path = METADATA_DIR + str(token_id) + ".json"
+        json_file_path = METADATA_DIR + str(token_id)
 
         print(f"Build #{token_id} nft metadata from {json_file_path}")
         with open(json_file_path, "r") as metadata_file:

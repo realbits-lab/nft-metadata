@@ -1,5 +1,6 @@
 import bpy
 import os
+import sys
 import requests
 import json
 from os import path
@@ -10,23 +11,15 @@ import builtins as __builtin__
 ################################################################################
 # Constant variables.
 ################################################################################
-# Parts directory containing each directory like "body" or "head" or "misc".
-PARTS_DIR = PROJECT_DIR + "parts/"
-
 # Metadata directory to where all metadata files generated.
-METADATA_DIR = "../build/json/"
+METADATA_DIR = "./build/json/"
 
 # Output directory to where all metadata files generated.
-IMAGE_OUTPUTS_DIR = "../build/image/"
-VIDEO_OUTPUTS_DIR = "../build/video/"
-GLB_OUTPUTS_DIR = "../build/glb/"
-VRM_OUTPUTS_DIR = "../build/vrm/"
-BACKGROUND_DIR = "../background/"
-
-# Token ID range.
-TOTAL_TOKEN_COUNT = 1
-START_TOKEN_ID = 1
-END_TOKEN_ID = TOTAL_TOKEN_COUNT + START_TOKEN_ID
+IMAGE_OUTPUTS_DIR = "./build/image/"
+VIDEO_OUTPUTS_DIR = "./build/video/"
+GLB_OUTPUTS_DIR = "./build/glb/"
+VRM_OUTPUTS_DIR = "./build/vrm/"
+BACKGROUND_DIR = "./background/"
 
 # Define trait type list.
 TRAIT_TYPE_LIST = ["background", "face", "body", "body_top",
@@ -122,8 +115,8 @@ def append_all_objects(file_path):
         bpy.ops.wm.append(directory=file_path + "/Object/", files=files)
 
 
-def append_asset_misc():
-    path = PARTS_DIR + "misc/" + "misc.blend/Collection/"
+def append_asset_misc(parts_dir):
+    path = parts_dir + "misc/" + "misc.blend/Collection/"
     object_name = "misc"
     bpy.ops.wm.append(filename=object_name, directory=path)
 
@@ -515,7 +508,7 @@ def change_bone_angle(bone_name, axis, angle):
     selected_bone.keyframe_insert(data_path="rotation_euler", frame=1)
 
 
-def generate(id, adict):
+def generate(id, adict, parts_dir):
     # * ########################################################################
     # * Add blender file objects as to trait_type and value.
     # * ########################################################################
@@ -532,7 +525,7 @@ def generate(id, adict):
             continue
 
             # Get file path as to trait_type and value.
-        file_path = f"{PARTS_DIR}/{trait_type}/{trait_type}_{value}.blend"
+        file_path = f"{parts_dir}/{trait_type}/{trait_type}_{value}.blend"
 
         # Append blender file objects.
         append_all_objects(file_path)
@@ -540,7 +533,7 @@ def generate(id, adict):
     # * ########################################################################
     # * Append misc file which includes camera and light.
     # * ########################################################################
-    append_asset_misc()
+    append_asset_misc(parts_dir)
 
     # * ########################################################################
     # * Get each bpy object.
@@ -608,10 +601,6 @@ def generate(id, adict):
         raise ValueError("faceObject is None.")
     if hairObject == None:
         raise ValueError("hairObject is None.")
-    if hairArmatureObject == None:
-        raise ValueError("hairArmatureObject is None.")
-    if hairArmatureObject.data == None:
-        raise ValueError("hairArmatureObject.data is None.")
     if bodyArmature == None:
         raise ValueError("bodyArmature is None.")
     if bodyArmatureObject == None:
@@ -619,11 +608,12 @@ def generate(id, adict):
     if bodyArmatureObject.type != "ARMATURE":
         raise ValueError("bodyArmatureObject.type is not ARMATURE.")
 
-    secondary_animation = (
-        hairArmatureObject.data.vrm_addon_extension.vrm0.secondary_animation
-    )
-    for bone_group in secondary_animation.bone_groups:
-        hairBoneGroupArray.append(bone_group)
+    if hairArmatureObject:
+        secondary_animation = (
+            hairArmatureObject.data.vrm_addon_extension.vrm0.secondary_animation
+        )
+        for bone_group in secondary_animation.bone_groups:
+            hairBoneGroupArray.append(bone_group)
 
     # * ########################################################################
     # * Set parent of face with body armature.
@@ -678,13 +668,14 @@ def generate(id, adict):
     # * Join hair armature to body armature.
     # * ########################################################################
 
-    bpy.ops.object.select_all(action="DESELECT")
-    selectedObjects = [bodyArmatureObject, hairArmatureObject]
-    print("-- bodyArmatureObject: ", bodyArmatureObject)
-    print("selectedObjects: ", selectedObjects)
-    with bpy.context.temp_override(active_object=bodyArmatureObject, selected_editable_objects=selectedObjects):
-        bpy.ops.object.join()
-    print("-- bodyArmatureObject: ", bodyArmatureObject)
+    if hairArmatureObject:
+        bpy.ops.object.select_all(action="DESELECT")
+        selectedObjects = [bodyArmatureObject, hairArmatureObject]
+        print("-- bodyArmatureObject: ", bodyArmatureObject)
+        print("selectedObjects: ", selectedObjects)
+        with bpy.context.temp_override(active_object=bodyArmatureObject, selected_editable_objects=selectedObjects):
+            bpy.ops.object.join()
+        print("-- bodyArmatureObject: ", bodyArmatureObject)
 
     # * ########################################################################
     # * Set parent of hair with body armature.
@@ -859,7 +850,7 @@ def generate(id, adict):
     # * ########################################################################
     # * Remove assets.
     # * ########################################################################
-    # remove_assets()
+    remove_assets()
 
     # * ########################################################################
     # * Print log.
@@ -901,18 +892,34 @@ def print_all_values(input):
 
 
 def main():
+    # Parts directory containing each directory like "body" or "head" or "misc".
+    # Add the tailing directory mark.
+    parts_dir = sys.argv[3] + "/"
+    start_token_id = int(sys.argv[4])
+    # Because range function exclude the last one.
+    end_token_id = int(sys.argv[5]) + 1
+    # print("parts_dirs: ", parts_dir)
+
     ###########################################################################
     # Check directory exists.
     ###########################################################################
+    if path.exists(parts_dir) == False:
+        print(
+            f"ERROR: Parts directory({parts_dir}) does not exist. Set the parts directory.")
+        return
+
     if path.exists(IMAGE_OUTPUTS_DIR) == False:
-        print("ERROR: Outputs directory does not exist. Set the absolute path to the IMAGE_OUTPUTS_DIR.")
-        return
+        print(f"ERROR: Outputs directory({IMAGE_OUTPUTS_DIR}) does not exist.")
+        os.makedirs(IMAGE_OUTPUTS_DIR, exist_ok=True)
     if path.exists(GLB_OUTPUTS_DIR) == False:
-        print("ERROR: Outputs directory does not exist. Set the absolute path to the GLB_OUTPUTS_DIR.")
-        return
+        print(f"ERROR: Outputs directory({GLB_OUTPUTS_DIR}) does not exist.")
+        os.makedirs(GLB_OUTPUTS_DIR, exist_ok=True)
     if path.exists(VRM_OUTPUTS_DIR) == False:
-        print("ERROR: Outputs directory does not exist. Set the absolute path to the VRM_OUTPUTS_DIR.")
-        return
+        print(f"ERROR: Outputs directory({VRM_OUTPUTS_DIR}) does not exist.")
+        os.makedirs(VRM_OUTPUTS_DIR, exist_ok=True)
+    if path.exists(VIDEO_OUTPUTS_DIR) == False:
+        print(f"ERROR: Outputs directory({VIDEO_OUTPUTS_DIR}) does not exist.")
+        os.makedirs(VIDEO_OUTPUTS_DIR, exist_ok=True)
 
     print("Start generating models...")
 
@@ -942,17 +949,19 @@ def main():
     ###########################################################################
     # Generate models as to metadata.
     ###########################################################################
-    for token_id in range(START_TOKEN_ID, END_TOKEN_ID):
+    for token_id in range(start_token_id, end_token_id):
         json_file_path = METADATA_DIR + str(token_id) + ".json"
-        with open(json_file_path, 'r') as metadata_file:
+
+        print(f"Build #{token_id} nft metadata from {json_file_path}")
+        with open(json_file_path, "r") as metadata_file:
             data = json.load(metadata_file)
             try:
-                generate(token_id, data)
+                generate(token_id, data, parts_dir)
             except ValueError as Error:
                 print("Error: ", Error)
 
     ###########################################################################
-    # Print log.
+    # Print lmg.
     ###########################################################################
     print("Done.")
 

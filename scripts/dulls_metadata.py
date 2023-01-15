@@ -1,24 +1,25 @@
 import metadata
 
 ################################################################################
-# For fanatic NFT.
+# For Dulls NFT.
 ################################################################################
 
 # Output directory to where all metadata files generated and saved.
 # The tail "/" should be added.
-output_dir = "../build/json/"
+output_dir = "./build/json/"
 
 # Metadata JSON structure
 # https://docs.opensea.io/docs/metadata-standards
-nft_name = "Fanatic NFT"
-nft_symbol = "FNT"
-nft_description = "Fanatic NFT"
+nft_name = "Dulls"
+nft_symbol = "DLL"
+nft_description = "Dulls NFT project for realbits"
+
 # The tail "/" should be added.
-nft_image_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/image/"
+nft_image_url = "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/image/"
 # The tail "/" should be added.
-nft_glb_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/glb/"
+nft_glb_url = "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/glb/"
 # The tail "/" should be added.
-nft_vrm_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/vrm/"
+nft_vrm_url = "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/vrm/"
 
 # For background.
 list_background = [
@@ -39,43 +40,44 @@ list_background = [
 
 # For hair.
 list_hair = [
-    "1", "2", "3", "4"
+    "bob", "bubble", "buzz", "hime", "octopus", "pigtail"
 ]
 
 # For face.
 list_face = [
-    "1", "2", "3", "4"
+    "dull",
 ]
 
 # For face accessories.
 list_top = [
-    "angle", "apple", "devil", "jingle"
+    "angel", "devil", "flower", "hairband", "sprout"
 ]
 list_middle = [
-    "alien", "round"
+    "aviator", "cheek", "goggle", "mole", "smart", "thuglife"
 ]
 list_side = [
-    "crown", "key", "ring"
+    "bigring", "headset", "pearlear", "pencil", "piercing"
 ]
 list_bottom = [
-    "candy", "mustache", "rose"
+    "bowtie", "candy", "cat", "goldchain", "mask", "mustache", "pearl"
 ]
 
 # For body.
 list_body = [
-    "girl"
+    # "hoodies", "sweater"
+    "hoodies"
 ]
 
 # For body clothes.
 list_body_top = [
-    "downjacket", "school", "sunsmile", "sweater"
+    "none",
 ]
 list_body_bottom = [
-    "khaki", "school", "shorts"
+    "none"
 ]
 
 metadata.generate_metadata(
-    output_dir, nft_name, nft_symbol, nft_description, nft_image_url,
+    "body", output_dir, nft_name, nft_symbol, nft_description, nft_image_url,
     nft_glb_url, nft_vrm_url, list_hair, list_face, list_top, list_middle,
     list_side, list_bottom, list_body, list_body_top, list_body_bottom,
     list_background)

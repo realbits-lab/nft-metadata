@@ -1,7 +1,7 @@
 import metadata
 
 ################################################################################
-# For clothes NFT.
+# For fanatic NFT.
 ################################################################################
 
 # Output directory to where all metadata files generated and saved.
@@ -10,9 +10,9 @@ output_dir = "../build/json/"
 
 # Metadata JSON structure
 # https://docs.opensea.io/docs/metadata-standards
-nft_name = "testNFT"
-nft_symbol = "TNT"
-nft_description = "testNFT for realbits"
+nft_name = "Fanatic NFT"
+nft_symbol = "FNT"
+nft_description = "Fanatic NFT"
 # The tail "/" should be added.
 nft_image_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/image/"
 # The tail "/" should be added.
@@ -39,43 +39,43 @@ list_background = [
 
 # For hair.
 list_hair = [
-    "bob", "bubble", "buzz", "hime", "octopus", "pigtail"
+    "1", "2", "3", "4"
 ]
 
 # For face.
 list_face = [
-    "dull",
+    "1", "2", "3", "4"
 ]
 
 # For face accessories.
 list_top = [
-    "angel", "devel", "flower", "hairband", "sprout"
+    "angle", "apple", "devil", "jingle"
 ]
 list_middle = [
-    "aviator", "cheek", "goggle", "mole", "smart", "thuglife"
+    "alien", "round"
 ]
 list_side = [
-    "bigring", "earphones", "headset", "pearlear", "pencil", "piercing"
+    "crown", "key", "ring"
 ]
 list_bottom = [
-    "bowtie", "candy", "cat", "goldchain", "mask", "mustache", "pearl"
+    "candy", "mustache", "rose"
 ]
 
 # For body.
 list_body = [
-    "casual"
+    "girl"
 ]
 
 # For body clothes.
 list_body_top = [
-    "none",
+    "downjacket", "school", "sunsmile", "sweater"
 ]
 list_body_bottom = [
-    "none"
+    "khaki", "school", "shorts"
 ]
 
 metadata.generate_metadata(
-    output_dir, nft_name, nft_symbol, nft_description, nft_image_url,
-    nft_glb_url, nft_vrm_url, list_hair, list_face, list_top, list_middle,
-    list_side, list_bottom, list_body, list_body_top, list_body_bottom,
-    list_background)
+    "body_bottom", output_dir, nft_name, nft_symbol, nft_description,
+    nft_image_url, nft_glb_url, nft_vrm_url, list_hair, list_face, list_top,
+    list_middle, list_side, list_bottom, list_body, list_body_top,
+    list_body_bottom, list_background)

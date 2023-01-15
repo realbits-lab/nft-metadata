@@ -178,7 +178,8 @@ def generate_metadata(
         }
 
         # Write json metadata file.
-        with open(f"{output_dir}{token_id}.json", "w") as outjson:
+        output_filename = f"{output_dir}{token_id}"
+        with open(output_filename, "w") as outjson:
             json.dump(obj, outjson, indent=4)
 
         print(f"nft id: {token_id}")

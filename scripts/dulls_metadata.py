@@ -14,6 +14,9 @@ nft_name = "Dulls"
 nft_symbol = "DLL"
 nft_description = "Dulls NFT project for realbits"
 
+# NFT token base uri
+# https://dulls-nft.s3.ap-northeast-2.amazonaws.com/json/
+
 # The tail "/" should be added.
 nft_image_url = "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/image/"
 # The tail "/" should be added.
@@ -77,7 +80,7 @@ list_body_bottom = [
 ]
 
 metadata.generate_metadata(
-    "body", output_dir, nft_name, nft_symbol, nft_description, nft_image_url,
-    nft_glb_url, nft_vrm_url, list_hair, list_face, list_top, list_middle,
-    list_side, list_bottom, list_body, list_body_top, list_body_bottom,
-    list_background)
+    "body", output_dir, nft_name, nft_symbol, nft_description,
+    nft_image_url, nft_glb_url, nft_vrm_url, list_hair, list_face, list_top,
+    list_middle, list_side, list_bottom, list_body, list_body_top,
+    list_body_bottom, list_background)

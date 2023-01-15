@@ -14,6 +14,9 @@ nft_name = "Dulls"
 nft_symbol = "DLL"
 nft_description = "Dulls NFT project for realbits"
 
+# NFT token base uri
+# https://dulls-nft.s3.ap-northeast-2.amazonaws.com/json/
+
 # The tail "/" should be added.
 nft_image_url = "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/image/"
 # The tail "/" should be added.

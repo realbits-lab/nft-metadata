@@ -679,17 +679,18 @@ def generate(id, adict, parts_dir):
     # * Set parent of hair with body armature.
     # * ########################################################################
 
-    # Initialize objection selection by deselecting all.
-    bpy.ops.object.select_all(action="DESELECT")
-    # Select hair object, if any.
-    hairObject.select_set(True)
-    # Select armature object, if any.
-    bpy.context.view_layer.objects.active = bodyArmatureObject
-    # Set parent of face object to body armature.
-    bpy.ops.object.parent_set(
-        type="OBJECT", keep_transform=True)
-    # Initialize objection selection by deselecting all.
-    bpy.ops.object.select_all(action="DESELECT")
+    if hairObject:
+        # Initialize objection selection by deselecting all.
+        bpy.ops.object.select_all(action="DESELECT")
+        # Select hair object, if any.
+        hairObject.select_set(True)
+        # Select armature object, if any.
+        bpy.context.view_layer.objects.active = bodyArmatureObject
+        # Set parent of face object to body armature.
+        bpy.ops.object.parent_set(
+            type="OBJECT", keep_transform=True)
+        # Initialize objection selection by deselecting all.
+        bpy.ops.object.select_all(action="DESELECT")
 
     # * ########################################################################
     # * Set parent of hair armature with body armature of J_Bip_C_Head.
@@ -828,6 +829,14 @@ def generate(id, adict, parts_dir):
     # * Render model to image.
     # * ########################################################################
     render_image(str(id))
+
+    # * ########################################################################
+    # * Recover angle.
+    # * ########################################################################
+    change_bone_angle("J_Bip_L_UpperArm", "X", 70)
+    change_bone_angle("J_Bip_L_LowerArm", "X", 10)
+    change_bone_angle("J_Bip_R_UpperArm", "X", 70)
+    change_bone_angle("J_Bip_R_LowerArm", "X", 10)
 
     # * ########################################################################
     # * Remove background object.

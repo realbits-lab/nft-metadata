@@ -565,6 +565,7 @@ def generate(id, adict, parts_dir):
     bodyObject = bpy.context.scene.objects.get("Body")
     bodyArmatureObject = bpy.context.scene.objects.get("Armature")
     bodyArmature = bpy.data.armatures["Armature"]
+    print("bodyObject: ", bodyObject)
     print("bodyArmatureObject: ", bodyArmatureObject)
     print("bodyArmature: ", bodyArmature)
 
@@ -809,6 +810,8 @@ def generate(id, adict, parts_dir):
         # print("selectedObjects: ", selectedObjects)
         with bpy.context.temp_override(active_object=bodyObject, selected_editable_objects=selectedObjects):
             bpy.ops.object.join()
+        
+        # TODO: Connect armature.
 
     if bodyBottomObject:
         bpy.ops.object.select_all(action="DESELECT")
@@ -817,6 +820,22 @@ def generate(id, adict, parts_dir):
         # print("selectedObjects: ", selectedObjects)
         with bpy.context.temp_override(active_object=bodyObject, selected_editable_objects=selectedObjects):
             bpy.ops.object.join()
+
+        # TODO: Connect armature.
+
+    # Initialize objection selection by deselecting all.
+    bpy.ops.object.mode_set(mode="OBJECT")
+    bpy.ops.object.select_all(action="DESELECT")
+    # Select hair object, if any.
+    bodyObject.select_set(True)
+    # Select armature object, if any.
+    bodyArmatureObject.select_set(True)
+    bpy.context.view_layer.objects.active = bodyArmatureObject
+    # Set parent of face object to body armature.
+    bpy.ops.object.parent_set(
+        type="Armature", keep_transform=True)
+    # Initialize objection selection by deselecting all.
+    bpy.ops.object.select_all(action="DESELECT")
 
     # * ########################################################################
     # * Change the angle of J_Bip_L_UpperArm and J_Bip_R_UpperArm.

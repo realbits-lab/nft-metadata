@@ -17,3 +17,7 @@ foo@bar:~$ blender -P scripts/model.py dulls-parts 1 10 --background
 - 10 means end token id.
 - --background option is not to run blender UI.
 - Should keep the order of commnad arguments.
+
+# How to alias blender command in mac
+
+- https://docs.blender.org/manual/en/latest/advanced/command_line/launch/macos.html

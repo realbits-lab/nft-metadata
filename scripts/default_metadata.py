@@ -29,7 +29,7 @@ list_background = [
 
 # For hair.
 list_hair = [
-    "bob"
+    "none"
 ]
 
 # For face.

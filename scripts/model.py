@@ -116,14 +116,41 @@ def append_all_objects(file_path):
 
 
 def append_asset_misc(parts_dir):
-    path = parts_dir + "misc/" + "misc.blend/Collection/"
+    file_path = parts_dir + "misc/" + "misc.blend"
     object_name = "misc"
-    bpy.ops.wm.append(filename=object_name, directory=path)
+    # bpy.ops.wm.append(filename=object_name, directory=file_path)
 
-    # Link camera to scene
-    cam = bpy.data.objects["camera"]
-    scene = bpy.context.scene
-    scene.camera = cam
+    with bpy.data.libraries.load(file_path) as (data_from, data_to):
+        files = []
+
+        # * Add all objects in blender file.
+        # print("data_from: ", data_from)
+        # print("data_from.objects: ", data_from.objects)
+        for obj in data_from.objects:
+            # print("obj: ", obj)
+            files.append({'name': obj})
+        # print("files: ", files)
+
+        # * Add all materials in blender file.
+        data_to.materials = data_from.materials
+
+        bpy.ops.wm.append(directory=file_path + "/Object/", files=files)
+
+    # * Link camera to scene.
+    # camera = bpy.data.objects["camera"]
+    # print("camera.type: ", camera.type)
+    # print("camera.data.lens_unit: ", camera.data.lens_unit)
+    bpy.context.scene.camera = bpy.data.objects["camera"]
+    # print("bpy.data.objects["camera"].data.lens_unit: ",
+    #       bpy.data.objects["camera"].data.lens_unit)
+    # print("bpy.context.scene.camera.data.lens_unit: ",
+    #       bpy.context.scene.camera.data.lens_unit)
+    # print("bpy.context.scene.camera.data.shift_y: ",
+    #       bpy.context.scene.camera.data.shift_y)
+    # print("bpy.context.scene.camera.data.angle: ",
+    #       bpy.context.scene.camera.data.angle)
+    # bpy.context.scene.camera.data.lens_unit = "FOV"
+    # bpy.context.scene.camera.data.angle = math.radians(4)
 
 
 def add_camera_location(camera, location, frame):
@@ -343,7 +370,7 @@ def render_glb(id):
                               export_colors=True,
                               use_mesh_edges=False,
                               use_mesh_vertices=False,
-                              export_cameras=False,
+                              export_cameras=True,
                               use_selection=False,
                               use_visible=False,
                               use_renderable=False,
@@ -526,6 +553,7 @@ def generate(id, adict, parts_dir):
 
             # Get file path as to trait_type and value.
         file_path = f"{parts_dir}/{trait_type}/{trait_type}_{value}.blend"
+        print("file_path: ", file_path)
 
         # Append blender file objects.
         append_all_objects(file_path)
@@ -824,7 +852,7 @@ def generate(id, adict, parts_dir):
         # Initialize objection selection by deselecting all.
         bpy.ops.object.select_all(action="DESELECT")
 
-	# * Join body top mesh to body mesh, if any.
+        # * Join body top mesh to body mesh, if any.
     if bodyTopObject:
         bpy.ops.object.select_all(action="DESELECT")
         selectedObjects = [bodyObject, bodyTopObject]
@@ -833,7 +861,7 @@ def generate(id, adict, parts_dir):
         with bpy.context.temp_override(active_object=bodyObject, selected_editable_objects=selectedObjects):
             bpy.ops.object.join()
 
-	# * Join body bottom mesh to body mesh, if any.
+        # * Join body bottom mesh to body mesh, if any.
     if bodyBottomObject:
         bpy.ops.object.select_all(action="DESELECT")
         selectedObjects = [bodyObject, bodyBottomObject]
@@ -873,12 +901,12 @@ def generate(id, adict, parts_dir):
     # * ########################################################################
     # * Render model to glb.
     # * ########################################################################
-    # render_glb(str(id))
+    render_glb(str(id))
 
     # * ########################################################################
     # * Render model to vrm.
     # * ########################################################################
-    # render_vrm(str(id))
+    render_vrm(str(id))
 
     # * ########################################################################
     # * Remove assets.

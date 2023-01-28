@@ -6,19 +6,19 @@ import metadata
 
 # Output directory to where all metadata files generated and saved.
 # The tail "/" should be added.
-output_dir = "../build/json/"
+output_dir = "./build/json/"
 
 # Metadata JSON structure
 # https://docs.opensea.io/docs/metadata-standards
-nft_name = "testNFT"
-nft_symbol = "TNT"
-nft_description = "testNFT for realbits"
+nft_name = "Clothes NFT"
+nft_symbol = "CNT"
+nft_description = "For people who like clothes."
 # The tail "/" should be added.
-nft_image_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/image/"
+nft_image_url = "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/image/"
 # The tail "/" should be added.
-nft_glb_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/glb/"
+nft_glb_url = "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/glb/"
 # The tail "/" should be added.
-nft_vrm_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/vrm/"
+nft_vrm_url = "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/vrm/"
 
 # For background.
 list_background = [
@@ -39,40 +39,39 @@ list_background = [
 
 # For hair.
 list_hair = [
-    "bob", "bubble", "buzz", "hime", "octopus", "pigtail"
+    "none",
 ]
 
 # For face.
 list_face = [
-    "dull",
+    "none",
 ]
 
 # For face accessories.
 list_top = [
-    "angel", "devel", "flower", "hairband", "sprout"
+    "1", "2",
 ]
 list_middle = [
-    "aviator", "cheek", "goggle", "mole", "smart", "thuglife"
+    "none",
 ]
 list_side = [
-    "bigring", "earphones", "headset", "pearlear", "pencil", "piercing"
+    "none",
 ]
 list_bottom = [
-    "bowtie", "candy", "cat", "goldchain", "mask", "mustache", "pearl"
+    "1", "2",
 ]
 
 # For body.
 list_body = [
-    "casual"
+    "1", "2",
 ]
 
 # For body clothes.
-list_body_top = [
-    "none",
-]
-list_body_bottom = [
-    "none"
-]
+list_body_top = ["1", "2", "3", "4", "5", "6", "7",
+                 "8", "9", "10", "11", "12", "13", "14", "15", ]
+
+list_body_bottom = ["1", "2", "3", "4", "5", "6", "7",
+                    "8", "9", "10", "11", "12", "13", "14", "15", ]
 
 metadata.generate_metadata(
     "body_bottom", output_dir, nft_name, nft_symbol, nft_description,

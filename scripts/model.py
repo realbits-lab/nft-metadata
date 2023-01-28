@@ -565,6 +565,7 @@ def generate(id, adict, parts_dir):
     bodyObject = bpy.context.scene.objects.get("Body")
     bodyArmatureObject = bpy.context.scene.objects.get("Armature")
     bodyArmature = bpy.data.armatures["Armature"]
+    print("bodyObject: ", bodyObject)
     print("bodyArmatureObject: ", bodyArmatureObject)
     print("bodyArmature: ", bodyArmature)
 
@@ -597,8 +598,6 @@ def generate(id, adict, parts_dir):
     if humanoid.all_required_bones_are_assigned() == False:
         raise ValueError(
             "humanoid.all_required_bones_are_assigned() is False.")
-    if faceObject == None:
-        raise ValueError("faceObject is None.")
     if bodyArmature == None:
         raise ValueError("bodyArmature is None.")
     if bodyArmatureObject == None:
@@ -617,15 +616,16 @@ def generate(id, adict, parts_dir):
     # * Set parent of face with body armature.
     # * ########################################################################
 
-    # Deselect all.
-    bpy.ops.object.select_all(action="DESELECT")
-    # Select face object.
-    faceObject.select_set(True)
-    # Set body armature object active.
-    bpy.context.view_layer.objects.active = bodyArmatureObject
-    # Set parent of face object to body armature.
-    bpy.ops.object.parent_set(
-        type="OBJECT", keep_transform=True)
+    if faceObject:
+        # Deselect all.
+        bpy.ops.object.select_all(action="DESELECT")
+        # Select face object.
+        faceObject.select_set(True)
+        # Set body armature object active.
+        bpy.context.view_layer.objects.active = bodyArmatureObject
+        # Set parent of face object to body armature.
+        bpy.ops.object.parent_set(
+            type="OBJECT", keep_transform=True)
 
     # * ########################################################################
     # * Add hair armature.
@@ -655,12 +655,13 @@ def generate(id, adict, parts_dir):
     # * Join body top armature to body armature.
     # * ########################################################################
 
-    bpy.ops.object.select_all(action="DESELECT")
-    selectedObjects = [bodyArmatureObject, bodyTopArmatureObject]
-    # print("bodyTopArmatureObject: ", bodyTopArmatureObject)
-    # print("selectedObjects: ", selectedObjects)
-    with bpy.context.temp_override(active_object=bodyArmatureObject, selected_editable_objects=selectedObjects):
-        bpy.ops.object.join()
+    if bodyTopArmatureObject:
+        bpy.ops.object.select_all(action="DESELECT")
+        selectedObjects = [bodyArmatureObject, bodyTopArmatureObject]
+        # print("bodyTopArmatureObject: ", bodyTopArmatureObject)
+        # print("selectedObjects: ", selectedObjects)
+        with bpy.context.temp_override(active_object=bodyArmatureObject, selected_editable_objects=selectedObjects):
+            bpy.ops.object.join()
 
     # * ########################################################################
     # * Join hair armature to body armature.
@@ -695,101 +696,103 @@ def generate(id, adict, parts_dir):
     # * ########################################################################
     # * Set parent of hair armature with body armature of J_Bip_C_Head.
     # * ########################################################################
+    if hairArmatureObject:
+        # Initialize headBone and headEditBone as None.
+        headBone = None
+        headEditBone = None
 
-    # Initialize headBone and headEditBone as None.
-    headBone = None
-    headEditBone = None
+        # Find J_Bip_C_Head bone.
+        for bone in bodyArmatureObject.data.bones:
+            if (bone.name == "J_Bip_C_Head"):
+                # print("found J_Bip_C_Head object")
+                headBone = bone
+                break
 
-    # Find J_Bip_C_Head bone.
-    for bone in bodyArmatureObject.data.bones:
-        if (bone.name == "J_Bip_C_Head"):
-            # print("found J_Bip_C_Head object")
-            headBone = bone
-            break
+        # Set active object.
+        bpy.context.view_layer.objects.active = bodyArmatureObject
+        bodyArmatureObject.data.bones.active = headBone
 
-    # Set active object.
-    bpy.context.view_layer.objects.active = bodyArmatureObject
-    bodyArmatureObject.data.bones.active = headBone
+        # Set armature edit mode.
+        if bpy.context.mode != "EDIT_ARMATURE":
+            bpy.ops.object.mode_set(mode="EDIT")
 
-    # Set armature edit mode.
-    if bpy.context.mode != "EDIT_ARMATURE":
-        bpy.ops.object.mode_set(mode="EDIT")
-
-    # Find J_Bip_C_Head edit bone.
-    for bone in bodyArmature.edit_bones:
-        # 3-1. Find J_Bip_C_Head bone.
-        if (bone.name == "J_Bip_C_Head"):
-            # print("found headBone: ", headBone)
-            headEditBone = bone
-            break
-
-        # Connect J_Sec_Hair1... to headEditBone as child bone.
-    if headBone != None and headEditBone != None:
+        # Find J_Bip_C_Head edit bone.
         for bone in bodyArmature.edit_bones:
-            # Naming pattern.
-            # J_Sec_Hair1_01, J_Sec_Hair2_01, ..., J_Sec_HairN_01.
-            if "J_Sec_Hair1" in bone.name:
-                bpy.ops.armature.select_all(action="DESELECT")
-                bone.parent = headEditBone
-                bone.use_connect = True
+            # 3-1. Find J_Bip_C_Head bone.
+            if (bone.name == "J_Bip_C_Head"):
+                # print("found headBone: ", headBone)
+                headEditBone = bone
+                break
 
-        # Set object mode.
-    bpy.ops.object.mode_set(mode="OBJECT")
+            # Connect J_Sec_Hair1... to headEditBone as child bone.
+        if headBone != None and headEditBone != None:
+            for bone in bodyArmature.edit_bones:
+                # Naming pattern.
+                # J_Sec_Hair1_01, J_Sec_Hair2_01, ..., J_Sec_HairN_01.
+                if "J_Sec_Hair1" in bone.name:
+                    bpy.ops.armature.select_all(action="DESELECT")
+                    bone.parent = headEditBone
+                    bone.use_connect = True
+
+            # Set object mode.
+        bpy.ops.object.mode_set(mode="OBJECT")
 
     # * ########################################################################
     # * Bind blend shape for face.
     # * ########################################################################
-    blend_shape_groups = (
-        armature.data.vrm_addon_extension.vrm0.blend_shape_master.blend_shape_groups
-    )
-    for blend_shape_group in blend_shape_groups:
-        for bind in blend_shape_group.binds:
-            if bind.index == "Fcl_MTH_A" or \
-                    bind.index == "Fcl_MTH_I" or \
-                    bind.index == "Fcl_MTH_U" or \
-                    bind.index == "Fcl_MTH_E" or \
-                    bind.index == "Fcl_MTH_O" or \
-                    bind.index == "Fcl_EYE_Close_L" or \
-                    bind.index == "Fcl_EYE_Close_R":
-                bind.mesh.value = "Face"
-                bind.weight = 100
+    if faceObject:
+        blend_shape_groups = (
+            armature.data.vrm_addon_extension.vrm0.blend_shape_master.blend_shape_groups
+        )
+        for blend_shape_group in blend_shape_groups:
+            for bind in blend_shape_group.binds:
+                if bind.index == "Fcl_MTH_A" or \
+                        bind.index == "Fcl_MTH_I" or \
+                        bind.index == "Fcl_MTH_U" or \
+                        bind.index == "Fcl_MTH_E" or \
+                        bind.index == "Fcl_MTH_O" or \
+                        bind.index == "Fcl_EYE_Close_L" or \
+                        bind.index == "Fcl_EYE_Close_R":
+                    bind.mesh.value = "Face"
+                    bind.weight = 100
 
     # * ########################################################################
-    # * Handle hair sping bone.
+    # * Handle hair spring bone.
     # * ########################################################################
-    # Get secondary animation data.
-    secondary_animation = (
-        armature.data.vrm_addon_extension.vrm0.secondary_animation
-    )
+    if hairObject:
+        # Get secondary animation data.
+        secondary_animation = (
+            armature.data.vrm_addon_extension.vrm0.secondary_animation
+        )
 
-    # Copy hair secondary animation bone group to body secondary animation bone group.
-    for hairBoneGroup in hairBoneGroupArray:
-        bone_group = secondary_animation.bone_groups.add()
+        # Copy hair secondary animation bone group to body secondary animation bone group.
+        for hairBoneGroup in hairBoneGroupArray:
+            bone_group = secondary_animation.bone_groups.add()
 
-        bone_group.comment = hairBoneGroup.comment
-        bone_group.stiffiness = hairBoneGroup.stiffiness
-        bone_group.gravity_power = hairBoneGroup.gravity_power
-        bone_group.gravity_dir = hairBoneGroup.gravity_dir
-        bone_group.drag_force = hairBoneGroup.drag_force
-        bone_group.hit_radius = hairBoneGroup.hit_radius
+            bone_group.comment = hairBoneGroup.comment
+            bone_group.stiffiness = hairBoneGroup.stiffiness
+            bone_group.gravity_power = hairBoneGroup.gravity_power
+            bone_group.gravity_dir = hairBoneGroup.gravity_dir
+            bone_group.drag_force = hairBoneGroup.drag_force
+            bone_group.hit_radius = hairBoneGroup.hit_radius
 
-        # Copy hair bone list.
-        for hairBone in hairBoneGroup.bones:
-            # print("hairBone.value: ", hairBone.value)
-            bone = bone_group.bones.add()
-            bone.value = hairBone.value
+            # Copy hair bone list.
+            for hairBone in hairBoneGroup.bones:
+                # print("hairBone.value: ", hairBone.value)
+                bone = bone_group.bones.add()
+                bone.value = hairBone.value
 
-        # Copy hair collider list.
-        for hairColliderGroup in hairColliderGroupArray:
-            collider_group = bone_group.collider_groups.add()
-            collider_group.value = hairColliderGroup.name
+            # Copy hair collider list.
+            for hairColliderGroup in hairColliderGroupArray:
+                collider_group = bone_group.collider_groups.add()
+                collider_group.value = hairColliderGroup.name
 
-        # for collider_group in bone_group.collider_groups:
-        #     print("collider_group.value: ", collider_group.value)
+            # for collider_group in bone_group.collider_groups:
+            #     print("collider_group.value: ", collider_group.value)
 
-        bone_group.show_expanded = hairBoneGroup.show_expanded
-        bone_group.show_expanded_bones = hairBoneGroup.show_expanded_bones
-        bone_group.show_expanded_collider_groups = hairBoneGroup.show_expanded_collider_groups
+            bone_group.show_expanded = hairBoneGroup.show_expanded
+            bone_group.show_expanded_bones = hairBoneGroup.show_expanded_bones
+            bone_group.show_expanded_collider_groups = hairBoneGroup.show_expanded_collider_groups
 
     # * ########################################################################
     # * Set parent of accessories with head bone.
@@ -800,7 +803,29 @@ def generate(id, adict, parts_dir):
     # * Join body_top and body_bottom to body.
     # * ########################################################################
 
-    if (bodyTopObject):
+    # * Set body armature as armature automatic parent of body top or bottom object, if any.
+    if bodyTopObject or bodyBottomObject:
+        # Initialize objection selection by deselecting all.
+        bpy.ops.object.mode_set(mode="OBJECT")
+        bpy.ops.object.select_all(action="DESELECT")
+
+        if bodyTopObject:
+            bodyTopObject.select_set(True)
+        if bodyBottomObject:
+            bodyBottomObject.select_set(True)
+
+        # Select armature object, if any.
+        bodyArmatureObject.select_set(True)
+        bpy.context.view_layer.objects.active = bodyArmatureObject
+        # Set parent of face object to body armature.
+        # https://docs.blender.org/api/current/bpy.ops.object.html
+        bpy.ops.object.parent_set(
+            type="ARMATURE_AUTO", keep_transform=True)
+        # Initialize objection selection by deselecting all.
+        bpy.ops.object.select_all(action="DESELECT")
+
+	# * Join body top mesh to body mesh, if any.
+    if bodyTopObject:
         bpy.ops.object.select_all(action="DESELECT")
         selectedObjects = [bodyObject, bodyTopObject]
         # print("bodyTopObject: ", bodyTopObject)
@@ -808,7 +833,8 @@ def generate(id, adict, parts_dir):
         with bpy.context.temp_override(active_object=bodyObject, selected_editable_objects=selectedObjects):
             bpy.ops.object.join()
 
-    if (bodyBottomObject):
+	# * Join body bottom mesh to body mesh, if any.
+    if bodyBottomObject:
         bpy.ops.object.select_all(action="DESELECT")
         selectedObjects = [bodyObject, bodyBottomObject]
         # print("bodyBottomObject: ", bodyBottomObject)
@@ -852,7 +878,7 @@ def generate(id, adict, parts_dir):
     # * ########################################################################
     # * Render model to vrm.
     # * ########################################################################
-    render_vrm(str(id))
+    # render_vrm(str(id))
 
     # * ########################################################################
     # * Remove assets.

@@ -45,70 +45,66 @@ def generate_metadata(
     ###########################################################################
     # Make all-permutated metadata.
     ###########################################################################
-    if body_mode == "body":
-        for hair_element in list_hair:
-            for face_element in list_face:
-                for top_element in list_top:
-                    for middle_element in list_middle:
-                        for side_element in list_side:
-                            for bottom_element in list_bottom:
-                                for body_element in list_body:
-                                    attribute = {
-                                        "attributes":
-                                        [
-                                            {"trait_type": "Hair",
-                                             "value": hair_element},
-                                            {"trait_type": "Face",
-                                             "value": face_element},
-                                            {"trait_type": "Top",
-                                             "value": top_element},
-                                            {"trait_type": "Middle",
-                                             "value": middle_element},
-                                            {"trait_type": "Side",
-                                             "value": side_element},
-                                            {"trait_type": "Bottom",
-                                             "value": bottom_element},
-                                            {"trait_type": "Body",
-                                             "value": body_element},
-                                        ]}
+    for hair_element in list_hair:
+        for face_element in list_face:
+            for top_element in list_top:
+                for middle_element in list_middle:
+                    for side_element in list_side:
+                        for bottom_element in list_bottom:
+                            for body_element in list_body:
+                                for body_top_element in list_body_top:
+                                    for body_bottom_element in list_body_bottom:
+                                        attributes = []
 
-                                    # Add random selected background.
-                                    background_attribute = get_random_background_attribute(
-                                        list_background)
-                                    attribute["attributes"].append(
-                                        background_attribute)
-
-                                    content_list.append(attribute)
-
-    elif body_mode == "body_top":
-        for hair_element in list_hair:
-            for face_element in list_face:
-                for top_element in list_top:
-                    for middle_element in list_middle:
-                        for side_element in list_side:
-                            for bottom_element in list_bottom:
-                                for body_element in list_body:
-                                    for body_top_element in list_body_top:
-                                        attribute = {
-                                            "attributes":
-                                            [
+                                        if hair_element != "none":
+                                            attributes.append(
                                                 {"trait_type": "Hair",
                                                  "value": hair_element},
+                                            )
+                                        if face_element != "none":
+                                            attributes.append(
                                                 {"trait_type": "Face",
                                                  "value": face_element},
+                                            )
+                                        if top_element != "none":
+                                            attributes.append(
                                                 {"trait_type": "Top",
                                                  "value": top_element},
+                                            )
+                                        if middle_element != "none":
+                                            attributes.append(
                                                 {"trait_type": "Middle",
                                                  "value": middle_element},
+                                            )
+                                        if side_element != "none":
+                                            attributes.append(
                                                 {"trait_type": "Side",
                                                  "value": side_element},
+                                            )
+                                        if bottom_element != "none":
+                                            attributes.append(
                                                 {"trait_type": "Bottom",
                                                  "value": bottom_element},
+                                            )
+                                        if body_element != "none":
+                                            attributes.append(
                                                 {"trait_type": "Body",
                                                  "value": body_element},
+                                            )
+                                        if body_top_element != "none":
+                                            attributes.append(
                                                 {"trait_type": "Body_Top",
                                                  "value": body_top_element},
-                                            ]}
+                                            )
+                                        if body_bottom_element != "none":
+                                            attributes.append(
+                                                {"trait_type": "Body_Bottom",
+                                                 "value": body_bottom_element}
+                                            )
+
+                                        attribute = {
+                                            "attributes": attributes
+                                        }
 
                                         # Add random selected background.
                                         background_attribute = get_random_background_attribute(
@@ -117,45 +113,6 @@ def generate_metadata(
                                             background_attribute)
 
                                         content_list.append(attribute)
-
-    elif body_mode == "body_bottom":
-        for hair_element in list_hair:
-            for face_element in list_face:
-                for top_element in list_top:
-                    for middle_element in list_middle:
-                        for side_element in list_side:
-                            for bottom_element in list_bottom:
-                                for body_element in list_body:
-                                    for body_top_element in list_body_top:
-                                        for body_bottom_element in list_body_bottom:
-                                            attribute = {
-                                                "attributes":
-                                                [{"trait_type": "Hair",
-                                                  "value": hair_element},
-                                                 {"trait_type": "Face",
-                                                  "value": face_element},
-                                                 {"trait_type": "Top",
-                                                  "value": top_element},
-                                                 {"trait_type": "Middle",
-                                                  "value": middle_element},
-                                                 {"trait_type": "Side",
-                                                  "value": side_element},
-                                                 {"trait_type": "Bottom",
-                                                  "value": bottom_element},
-                                                 {"trait_type": "Body",
-                                                  "value": body_element},
-                                                 {"trait_type": "Body_Top",
-                                                  "value": body_top_element},
-                                                 {"trait_type": "Body_Bottom",
-                                                  "value": body_bottom_element}]}
-
-                                            # Add random selected background.
-                                            background_attribute = get_random_background_attribute(
-                                                list_background)
-                                            attribute["attributes"].append(
-                                                background_attribute)
-
-                                            content_list.append(attribute)
 
     ###########################################################################
     # Create metadata.

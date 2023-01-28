@@ -137,7 +137,7 @@ def append_asset_misc(parts_dir):
         bpy.ops.wm.append(directory=file_path + "/Object/", files=files)
 
     # * Link camera to scene.
-    # camera = bpy.data.objects["camera"]
+    camera = bpy.data.objects["camera"]
     # print("camera.type: ", camera.type)
     # print("camera.data.lens_unit: ", camera.data.lens_unit)
     bpy.context.scene.camera = bpy.data.objects["camera"]

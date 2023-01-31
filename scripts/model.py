@@ -656,6 +656,49 @@ def generate(id, adict, parts_dir):
             type="OBJECT", keep_transform=True)
 
     # * ########################################################################
+    # * Join body_top and body_bottom to body.
+    # * ########################################################################
+
+    # * Set body armature as armature automatic parent of body top or bottom object, if any.
+    if bodyTopObject or bodyBottomObject:
+        # Initialize objection selection by deselecting all.
+        bpy.ops.object.mode_set(mode="OBJECT")
+        bpy.ops.object.select_all(action="DESELECT")
+
+        if bodyTopObject:
+            bodyTopObject.select_set(True)
+        # if bodyBottomObject:
+        #     bodyBottomObject.select_set(True)
+
+        # Select armature object, if any.
+        bodyArmatureObject.select_set(True)
+        bpy.context.view_layer.objects.active = bodyArmatureObject
+        # Set parent of face object to body armature.
+        # https://docs.blender.org/api/current/bpy.ops.object.html
+        bpy.ops.object.parent_set(
+            type="ARMATURE_AUTO", keep_transform=False)
+        # Initialize objection selection by deselecting all.
+        bpy.ops.object.select_all(action="DESELECT")
+
+    # * Join body top mesh to body mesh, if any.
+    if bodyTopObject:
+        bpy.ops.object.select_all(action="DESELECT")
+        selectedObjects = [bodyObject, bodyTopObject]
+        # print("bodyTopObject: ", bodyTopObject)
+        # print("selectedObjects: ", selectedObjects)
+        with bpy.context.temp_override(active_object=bodyObject, selected_editable_objects=selectedObjects):
+            bpy.ops.object.join()
+
+    # * Join body bottom mesh to body mesh, if any.
+    if bodyBottomObject:
+        bpy.ops.object.select_all(action="DESELECT")
+        selectedObjects = [bodyObject, bodyBottomObject]
+        # print("bodyBottomObject: ", bodyBottomObject)
+        # print("selectedObjects: ", selectedObjects)
+        with bpy.context.temp_override(active_object=bodyObject, selected_editable_objects=selectedObjects):
+            bpy.ops.object.join()
+
+    # * ########################################################################
     # * Add hair armature.
     # * ########################################################################
 
@@ -826,51 +869,6 @@ def generate(id, adict, parts_dir):
     # * Set parent of accessories with head bone.
     # * ########################################################################
     add_accessory_objects()
-
-    # * ########################################################################
-    # * Join body_top and body_bottom to body.
-    # * ########################################################################
-
-	#* TODO: Fix body to armature parent.
-	#* TODO: Fix body collider.
-    # * Set body armature as armature automatic parent of body top or bottom object, if any.
-    if bodyTopObject or bodyBottomObject:
-        # Initialize objection selection by deselecting all.
-        bpy.ops.object.mode_set(mode="OBJECT")
-        bpy.ops.object.select_all(action="DESELECT")
-
-        if bodyTopObject:
-            bodyTopObject.select_set(True)
-        # if bodyBottomObject:
-        #     bodyBottomObject.select_set(True)
-
-        # Select armature object, if any.
-        bodyArmatureObject.select_set(True)
-        bpy.context.view_layer.objects.active = bodyArmatureObject
-        # Set parent of face object to body armature.
-        # https://docs.blender.org/api/current/bpy.ops.object.html
-        bpy.ops.object.parent_set(
-            type="ARMATURE_AUTO", keep_transform=True)
-        # Initialize objection selection by deselecting all.
-        bpy.ops.object.select_all(action="DESELECT")
-
-    # * Join body top mesh to body mesh, if any.
-    if bodyTopObject:
-        bpy.ops.object.select_all(action="DESELECT")
-        selectedObjects = [bodyObject, bodyTopObject]
-        # print("bodyTopObject: ", bodyTopObject)
-        # print("selectedObjects: ", selectedObjects)
-        with bpy.context.temp_override(active_object=bodyObject, selected_editable_objects=selectedObjects):
-            bpy.ops.object.join()
-
-    # * Join body bottom mesh to body mesh, if any.
-    if bodyBottomObject:
-        bpy.ops.object.select_all(action="DESELECT")
-        selectedObjects = [bodyObject, bodyBottomObject]
-        # print("bodyBottomObject: ", bodyBottomObject)
-        # print("selectedObjects: ", selectedObjects)
-        with bpy.context.temp_override(active_object=bodyObject, selected_editable_objects=selectedObjects):
-            bpy.ops.object.join()
 
     # * ########################################################################
     # * Change the angle of J_Bip_L_UpperArm and J_Bip_R_UpperArm.

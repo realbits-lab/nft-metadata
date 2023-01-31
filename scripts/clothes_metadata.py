@@ -70,12 +70,13 @@ list_body = [
 ]
 
 # For body clothes.
-list_body_top = ["1", "2", "3", "4", "5", "6", "7",
-                 "8", "9", "10", "11", "12", "13", "14", "15", ]
+# list_body_top = ["1", "2", "3", "4", "5", "6", "7",
+#                  "8", "9", "10", "11", "12", "13", "14", "15", ]
+list_body_top = ["1", ]
 
-# list_body_bottom = ["1", "2", "3", "4", "5", "6", "7",
-#                     "8", "9", "10", "11", "12", "13", "14", "15", ]
-list_body_bottom = ["none", ]
+list_body_bottom = ["1", "2", "3", "4", "5", "6", "7",
+                    "8", "9", "10", "11", "12", "13", "14", "15", ]
+# list_body_bottom = ["1", ]
 
 metadata.generate_metadata(
     output_dir, nft_name, nft_symbol, nft_description, nft_image_url,

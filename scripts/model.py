@@ -852,7 +852,7 @@ def generate(id, adict, parts_dir):
         # Initialize objection selection by deselecting all.
         bpy.ops.object.select_all(action="DESELECT")
 
-        # * Join body top mesh to body mesh, if any.
+    # * Join body top mesh to body mesh, if any.
     if bodyTopObject:
         bpy.ops.object.select_all(action="DESELECT")
         selectedObjects = [bodyObject, bodyTopObject]
@@ -861,7 +861,7 @@ def generate(id, adict, parts_dir):
         with bpy.context.temp_override(active_object=bodyObject, selected_editable_objects=selectedObjects):
             bpy.ops.object.join()
 
-        # * Join body bottom mesh to body mesh, if any.
+    # * Join body bottom mesh to body mesh, if any.
     if bodyBottomObject:
         bpy.ops.object.select_all(action="DESELECT")
         selectedObjects = [bodyObject, bodyBottomObject]
@@ -901,7 +901,7 @@ def generate(id, adict, parts_dir):
     # * ########################################################################
     # * Render model to glb.
     # * ########################################################################
-    render_glb(str(id))
+    # render_glb(str(id))
 
     # * ########################################################################
     # * Render model to vrm.

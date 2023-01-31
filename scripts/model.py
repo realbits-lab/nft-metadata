@@ -831,6 +831,8 @@ def generate(id, adict, parts_dir):
     # * Join body_top and body_bottom to body.
     # * ########################################################################
 
+	#* TODO: Fix body to armature parent.
+	#* TODO: Fix body collider.
     # * Set body armature as armature automatic parent of body top or bottom object, if any.
     if bodyTopObject or bodyBottomObject:
         # Initialize objection selection by deselecting all.
@@ -839,8 +841,8 @@ def generate(id, adict, parts_dir):
 
         if bodyTopObject:
             bodyTopObject.select_set(True)
-        if bodyBottomObject:
-            bodyBottomObject.select_set(True)
+        # if bodyBottomObject:
+        #     bodyBottomObject.select_set(True)
 
         # Select armature object, if any.
         bodyArmatureObject.select_set(True)

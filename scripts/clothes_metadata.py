@@ -49,7 +49,8 @@ list_face = [
 
 # For face accessories.
 list_top = [
-    "1", "2",
+    # "1", "2",
+    "none",
 ]
 list_middle = [
     "none",
@@ -58,23 +59,27 @@ list_side = [
     "none",
 ]
 list_bottom = [
-    "1", "2",
+    # "1", "2",
+    "none",
 ]
 
 # For body.
 list_body = [
-    "1", "2",
+    # "1", "2",
+    "1",
 ]
 
 # For body clothes.
-list_body_top = ["1", "2", "3", "4", "5", "6", "7",
-                 "8", "9", "10", "11", "12", "13", "14", "15", ]
+# list_body_top = ["1", "2", "3", "4", "5", "6", "7",
+#                  "8", "9", "10", "11", "12", "13", "14", "15", ]
+list_body_top = ["1", ]
 
-list_body_bottom = ["1", "2", "3", "4", "5", "6", "7",
-                    "8", "9", "10", "11", "12", "13", "14", "15", ]
+# list_body_bottom = ["1", "2", "3", "4", "5", "6", "7",
+#                     "8", "9", "10", "11", "12", "13", "14", "15", ]
+list_body_bottom = ["5", ]
 
 metadata.generate_metadata(
-    "body_bottom", output_dir, nft_name, nft_symbol, nft_description,
-    nft_image_url, nft_glb_url, nft_vrm_url, list_hair, list_face, list_top,
-    list_middle, list_side, list_bottom, list_body, list_body_top,
-    list_body_bottom, list_background)
+    output_dir, nft_name, nft_symbol, nft_description, nft_image_url,
+    nft_glb_url, nft_vrm_url, list_hair, list_face, list_top, list_middle,
+    list_side, list_bottom, list_body, list_body_top, list_body_bottom,
+    list_background)

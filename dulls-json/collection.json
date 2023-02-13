@@ -1,0 +1,22 @@
+{
+	"name": "Dulls",
+	"description": "Dulls NFT project for realbits.",
+	"image": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection.png",
+	"attributes": {
+		"top": [
+			"angel",
+			"devil",
+			"flower",
+			"hairband",
+			"sprout"
+		],
+		"middle": [
+			"aviator",
+			"cheek",
+			"goggle",
+			"mole",
+			"smart",
+			"thuglife"
+		]
+	}
+}

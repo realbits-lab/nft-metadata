@@ -539,6 +539,7 @@ def generate(id, adict, parts_dir):
     # * ########################################################################
     # * Add blender file objects as to trait_type and value.
     # * ########################################################################
+    print("call generate()")
 
     for attr in adict["attributes"]:
         # Get trait_type and value.
@@ -551,7 +552,7 @@ def generate(id, adict, parts_dir):
         if attr["value"] == "" or attr["value"] == "none":
             continue
 
-            # Get file path as to trait_type and value.
+        # Get file path as to trait_type and value.
         file_path = f"{parts_dir}/{trait_type}/{trait_type}_{value}.blend"
         print("file_path: ", file_path)
 

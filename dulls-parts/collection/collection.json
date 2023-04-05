@@ -36,33 +36,33 @@
 		"middle": [
 			{
 				"name": "aviator",
-				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/aviator.png",
-				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/aviator.glb"
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/aviator.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/aviator.glb"
 			},
 			{
 				"name": "cheek",
-				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/cheek.png",
-				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/cheek.glb"
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/cheek.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/cheek.glb"
 			},
 			{
 				"name": "goggle",
-				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/goggle.png",
-				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/goggle.glb"
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/goggle.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/goggle.glb"
 			},
 			{
 				"name": "mole",
-				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/mole.png",
-				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/mole.glb"
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/mole.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/mole.glb"
 			},
 			{
 				"name": "smart",
-				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/smart.png",
-				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/smart.glb"
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/smart.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/smart.glb"
 			},
 			{
 				"name": "thuglife",
-				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/thuglife.png",
-				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/thuglife.glb"
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/thuglife.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/thuglife.glb"
 			}
 		]
 	}

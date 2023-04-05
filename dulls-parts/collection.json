@@ -1,7 +1,7 @@
 {
 	"name": "Dulls",
 	"description": "Dulls NFT project for realbits.",
-	"image": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection.png",
+	"image": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/collection.png",
 	"base_model": {
 		"vrm_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/base/base.vrm"
 	},

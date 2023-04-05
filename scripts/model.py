@@ -672,8 +672,8 @@ def generate(id, adict, parts_dir):
 
         # * TODO: Set true.
         # * Select body bottom object.
-        # if bodyBottomObject:
-        #     bodyBottomObject.select_set(True)
+        if bodyBottomObject:
+            bodyBottomObject.select_set(True)
 
         # * Select armature object.
         bodyArmatureObject.select_set(True)

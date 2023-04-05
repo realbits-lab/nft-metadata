@@ -641,9 +641,9 @@ def generate(id, adict, parts_dir):
         for bone_group in secondary_animation.bone_groups:
             hairBoneGroupArray.append(bone_group)
 
-    # * ########################################################################
+    # *#########################################################################
     # * Set parent of face with body armature.
-    # * ########################################################################
+    # *#########################################################################
 
     if faceObject:
         # Deselect all.
@@ -656,37 +656,42 @@ def generate(id, adict, parts_dir):
         bpy.ops.object.parent_set(
             type="OBJECT", keep_transform=True)
 
-    # * ########################################################################
+    # *#########################################################################
     # * Join body_top and body_bottom to body.
-    # * ########################################################################
+    # *#########################################################################
 
-    # * Set body armature as armature automatic parent of body top or bottom object, if any.
+    # * Set the parent of automatic parent of body top or body bottom object to a body armarture.
     if bodyTopObject or bodyBottomObject:
-        # Initialize objection selection by deselecting all.
+        # * Initialize object selection by deselecting all.
         bpy.ops.object.mode_set(mode="OBJECT")
         bpy.ops.object.select_all(action="DESELECT")
 
+        # * Select body top object.
         if bodyTopObject:
             bodyTopObject.select_set(True)
+
+        # * TODO: Set true.
+        # * Select body bottom object.
         # if bodyBottomObject:
         #     bodyBottomObject.select_set(True)
 
-        # Select armature object, if any.
+        # * Select armature object.
         bodyArmatureObject.select_set(True)
         bpy.context.view_layer.objects.active = bodyArmatureObject
-        # Set parent of face object to body armature.
+
+        # * Set the parent of body top and bottom object to body armature.
         # https://docs.blender.org/api/current/bpy.ops.object.html
         bpy.ops.object.parent_set(
             type="ARMATURE_AUTO", keep_transform=False)
-        # Initialize objection selection by deselecting all.
+
+        # * Initialize object selection by deselecting all, again.
         bpy.ops.object.select_all(action="DESELECT")
 
     # * Join body top mesh to body mesh, if any.
     if bodyTopObject:
         bpy.ops.object.select_all(action="DESELECT")
         selectedObjects = [bodyObject, bodyTopObject]
-        # print("bodyTopObject: ", bodyTopObject)
-        # print("selectedObjects: ", selectedObjects)
+
         with bpy.context.temp_override(active_object=bodyObject, selected_editable_objects=selectedObjects):
             bpy.ops.object.join()
 
@@ -694,8 +699,7 @@ def generate(id, adict, parts_dir):
     if bodyBottomObject:
         bpy.ops.object.select_all(action="DESELECT")
         selectedObjects = [bodyObject, bodyBottomObject]
-        # print("bodyBottomObject: ", bodyBottomObject)
-        # print("selectedObjects: ", selectedObjects)
+
         with bpy.context.temp_override(active_object=bodyObject, selected_editable_objects=selectedObjects):
             bpy.ops.object.join()
 

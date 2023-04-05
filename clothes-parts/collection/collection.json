@@ -1,0 +1,34 @@
+{
+	"name": "Clothes",
+	"description": "Clothes NFT project.",
+	"image": "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/collection/collection.png",
+	"base_model": {
+		"vrm_url": "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/collection/base/base.vrm"
+	},
+	"attributes": {
+		"body_top": [
+			{
+				"name": "1",
+				"image_url": "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/collection/body_top/1.png",
+				"glb_url": "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/collection/body_top/1.glb"
+			},
+			{
+				"name": "2",
+				"image_url": "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/collection/body_top/2.png",
+				"glb_url": "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/collection/body_top/2.glb"
+			}
+		],
+		"body_bottom": [
+			{
+				"name": "1",
+				"image_url": "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/collection/body_bottom/1.png",
+				"glb_url": "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/collection/body_bottom/1.glb"
+			},
+			{
+				"name": "2",
+				"image_url": "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/collection/body_bottom/2.png",
+				"glb_url": "https://clothes-nft.s3.ap-northeast-2.amazonaws.com/collection/body_bottom/2.glb"
+			}
+		]
+	}
+}

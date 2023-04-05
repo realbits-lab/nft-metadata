@@ -46,7 +46,7 @@ list_background = [
 #     "bob", "bubble", "buzz", "hime", "octopus", "pigtail"
 # ]
 list_hair = [
-    "bob",
+    "none",
 ]
 
 # For face.
@@ -55,9 +55,9 @@ list_face = [
 ]
 
 # For face accessories.
-# list_top = [
-#     "angel", "devil", "flower", "hairband", "sprout"
-# ]
+list_top = [
+    "angel", "devil", "flower", "hairband", "sprout"
+]
 # list_middle = [
 #     "aviator", "cheek", "goggle", "mole", "smart", "thuglife"
 # ]
@@ -67,9 +67,9 @@ list_face = [
 # list_bottom = [
 #     "bowtie", "candy", "cat", "goldchain", "mask", "mustache", "pearl"
 # ]
-list_top = [
-    "none",
-]
+# list_top = [
+#     "none",
+# ]
 list_middle = [
     "none",
 ]

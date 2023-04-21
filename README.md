@@ -10,6 +10,7 @@ foo@bar:~$ python scripts/dulls_metadata.py
 
 ```console
 foo@bar:~$ blender -P scripts/model.py dulls-parts 1 10 --background
+foo@bar:~$ blender -P scripts/model.py clothes-parts 1 1 --background >& blender.log
 ```
 
 - blender command is an alias of blender application command.

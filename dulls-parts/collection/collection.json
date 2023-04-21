@@ -1,0 +1,69 @@
+{
+	"name": "Dulls",
+	"description": "Dulls NFT project for realbits.",
+	"image": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/collection.png",
+	"base_model": {
+		"vrm_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/base/base.vrm"
+	},
+	"attributes": {
+		"top": [
+			{
+				"name": "angel",
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/angel.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/angel.glb"
+			},
+			{
+				"name": "devil",
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/devil.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/devil.glb"
+			},
+			{
+				"name": "flower",
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/flower.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/flower.glb"
+			},
+			{
+				"name": "hairband",
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/hairband.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/hairband.glb"
+			},
+			{
+				"name": "sprout",
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/sprout.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/top/sprout.glb"
+			}
+		],
+		"middle": [
+			{
+				"name": "aviator",
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/aviator.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/aviator.glb"
+			},
+			{
+				"name": "cheek",
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/cheek.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/cheek.glb"
+			},
+			{
+				"name": "goggle",
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/goggle.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/goggle.glb"
+			},
+			{
+				"name": "mole",
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/mole.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/mole.glb"
+			},
+			{
+				"name": "smart",
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/smart.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/smart.glb"
+			},
+			{
+				"name": "thuglife",
+				"image_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/thuglife.png",
+				"glb_url": "https://dulls-nft.s3.ap-northeast-2.amazonaws.com/collection/middle/thuglife.glb"
+			}
+		]
+	}
+}

@@ -69,14 +69,16 @@ list_body = [
     "1",
 ]
 
-# For body clothes.
-# list_body_top = ["1", "2", "3", "4", "5", "6", "7",
-#                  "8", "9", "10", "11", "12", "13", "14", "15", ]
-list_body_top = ["1", ]
+#* TODO: Fix model for armature auto: 1, 3, 4, 5, 7, 10, 15
+#* For body top clothes.
+list_body_top = ["1", "2", "3", "4", "5", "6", "7",
+                 "8", "9", "10", "11", "12", "13", "14", "15", ]
+# list_body_top = ["none", ]
 
+#* For body bottom clothes.
 # list_body_bottom = ["1", "2", "3", "4", "5", "6", "7",
 #                     "8", "9", "10", "11", "12", "13", "14", "15", ]
-list_body_bottom = ["5", ]
+list_body_bottom = ["1", ]
 
 metadata.generate_metadata(
     output_dir, nft_name, nft_symbol, nft_description, nft_image_url,

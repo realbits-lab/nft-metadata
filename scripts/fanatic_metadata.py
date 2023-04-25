@@ -6,7 +6,7 @@ import metadata
 
 # Output directory to where all metadata files generated and saved.
 # The tail "/" should be added.
-output_dir = "../build/json/"
+output_dir = "./build/json/"
 
 # Metadata JSON structure
 # https://docs.opensea.io/docs/metadata-standards
@@ -14,11 +14,11 @@ nft_name = "Fanatic NFT"
 nft_symbol = "FNT"
 nft_description = "Fanatic NFT"
 # The tail "/" should be added.
-nft_image_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/image/"
+nft_image_url = "https://fanatic-nft.s3.ap-northeast-2.amazonaws.com/image/"
 # The tail "/" should be added.
-nft_glb_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/glb/"
+nft_glb_url = "https://fanatic-nft.s3.ap-northeast-2.amazonaws.com/glb/"
 # The tail "/" should be added.
-nft_vrm_url = "https://js-nft.s3.ap-northeast-2.amazonaws.com/vrm/"
+nft_vrm_url = "https://fanatic-nft.s3.ap-northeast-2.amazonaws.com/vrm/"
 
 # For background.
 list_background = [
@@ -37,42 +37,46 @@ list_background = [
     "white"
 ]
 
-# For hair.
+# * For hair.
 list_hair = [
     "1", "2", "3", "4"
 ]
+# list_hair = ["none"]
 
-# For face.
-list_face = [
-    "1", "2", "3", "4"
-]
+# * For face.
+# list_face = [
+#     "1", "2", "3", "4"
+# ]
+list_face = ["1"]
 
-# For face accessories.
-list_top = [
-    "angle", "apple", "devil", "jingle"
-]
-list_middle = [
-    "alien", "round"
-]
-list_side = [
-    "crown", "key", "ring"
-]
-list_bottom = [
-    "candy", "mustache", "rose"
-]
+# * For face accessories.
+# list_top = ["angle", "apple", "devil", "jingle",
+#             "strawhat", "strawhat1", "strawhat2", "sunflower"]
+# list_middle = [
+#     "alien", "round"
+# ]
+# list_side = [
+#     "crown", "key", "ring", "sunflower"
+# ]
+# list_bottom = [
+#     "candy", "mustache", "rose"
+# ]
+list_top = ["none", "1", "2"]
+list_middle = ["none", "1", "2"]
+list_side = ["none", "1", "2"]
+list_bottom = ["none", "1", "2"]
 
-# For body.
+# * For body.
 list_body = [
     "girl"
 ]
 
-# For body clothes.
-list_body_top = [
-    "downjacket", "school", "sunsmile", "sweater"
-]
+# * For body clothes.
+list_body_top = ["blazer", "blazerpink", "bluecloud", "cowcatsuit",
+                 "downjacket", "school", "snow", "sunsmile", "sweater", "whitecloud"]
 list_body_bottom = [
-    "khaki", "school", "shorts"
-]
+    "chino", "chinobeige", "cowcatsuit", "jeans", "jeanschain", "jeanssky",
+    "khaki", "school", "shorts", "shortscotton"]
 
 metadata.generate_metadata(
     output_dir, nft_name, nft_symbol, nft_description, nft_image_url,

@@ -44,27 +44,23 @@ list_hair = [
 # list_hair = ["none"]
 
 # * For face.
-# list_face = [
-#     "1", "2", "3", "4"
-# ]
-list_face = ["1"]
+list_face = [
+    "face"
+]
 
 # * For face accessories.
-# list_top = ["angle", "apple", "devil", "jingle",
-#             "strawhat", "strawhat1", "strawhat2", "sunflower"]
-# list_middle = [
-#     "alien", "round"
-# ]
-# list_side = [
-#     "crown", "key", "ring", "sunflower"
-# ]
-# list_bottom = [
-#     "candy", "mustache", "rose"
-# ]
-list_top = ["none", "1", "2"]
-list_middle = ["none", "1", "2"]
-list_side = ["none", "1", "2"]
-list_bottom = ["none", "1", "2"]
+list_top = [
+    "angle", "apple", "devil", "jingle", "strawhat", "sunflower"
+]
+list_middle = [
+    "alien", "round"
+]
+list_side = [
+    "crown", "key", "ring", "sunflower"
+]
+list_bottom = [
+    "candy", "mustache", "rose"
+]
 
 # * For body.
 list_body = [

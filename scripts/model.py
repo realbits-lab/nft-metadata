@@ -481,8 +481,13 @@ def remove_assets():
 
 
 def add_accessory_objects():
+    # * Get body armature object.
     bodyArmatureObject = bpy.context.scene.objects.get("Armature")
+    if bodyArmatureObject == None:
+        print("bodyArmatureObject is None error.")
+        exit
     print("bodyArmatureObject: ", bodyArmatureObject)
+
     topObject = bpy.context.scene.objects.get("top")
     sideObject = bpy.context.scene.objects.get("side")
     middleObject = bpy.context.scene.objects.get("middle")
@@ -593,7 +598,12 @@ def generate(id, adict, parts_dir):
     # For body object and armature.
     bodyObject = bpy.context.scene.objects.get("Body")
     bodyArmatureObject = bpy.context.scene.objects.get("Armature")
+    if bodyArmatureObject == None:
+        print("bodyArmatureObject is None error.")
     bodyArmature = bpy.data.armatures["Armature"]
+    if bodyArmature == None:
+        print("bodyArmature is None error.")
+        exit
     print("bodyObject: ", bodyObject)
     print("bodyArmatureObject: ", bodyArmatureObject)
     print("bodyArmature: ", bodyArmature)

@@ -23,7 +23,6 @@ nft_vrm_url = "https://fanatic-nft.s3.ap-northeast-2.amazonaws.com/vrm/"
 # For background.
 list_background = [
     "berry",
-    "black",
     "blue",
     "hotpink",
     "laim",
@@ -39,7 +38,7 @@ list_background = [
 
 # * For hair.
 list_hair = [
-    "1", "2", "3", "4"
+    "pinkblond", "purplelong", "short", "twintail"
 ]
 # list_hair = ["none"]
 
@@ -50,16 +49,16 @@ list_face = [
 
 # * For face accessories.
 list_top = [
-    "angle", "apple", "devil", "jingle", "strawhat", "sunflower"
+    "angle", "sunstrawhat"
 ]
 list_middle = [
     "alien", "round"
 ]
 list_side = [
-    "crown", "key", "ring", "sunflower"
+    "crown", "sunflower"
 ]
 list_bottom = [
-    "candy", "mustache", "rose"
+    "candy", "rose"
 ]
 
 # * For body.

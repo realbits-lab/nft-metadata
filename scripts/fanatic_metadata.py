@@ -40,7 +40,9 @@ list_background = [
 list_hair = [
     "pinkblond", "purplelong", "short", "twintail"
 ]
-# list_hair = ["none"]
+# list_hair = [
+#     "none"
+# ]
 
 # * For face.
 list_face = [
@@ -48,17 +50,29 @@ list_face = [
 ]
 
 # * For face accessories.
+# list_top = [
+#     "angle", "sunstrawhat"
+# ]
+# list_middle = [
+#     "alien", "round"
+# ]
+# list_side = [
+#     "crown", "sunflower"
+# ]
+# list_bottom = [
+#     "candy", "rose"
+# ]
 list_top = [
-    "angle", "sunstrawhat"
+    "none"
 ]
 list_middle = [
-    "alien", "round"
+    "none"
 ]
 list_side = [
-    "crown", "sunflower"
+    "none"
 ]
 list_bottom = [
-    "candy", "rose"
+    "none"
 ]
 
 # * For body.
@@ -67,11 +81,20 @@ list_body = [
 ]
 
 # * For body clothes.
-list_body_top = ["blazer", "blazerpink", "bluecloud", "cowcatsuit",
-                 "downjacket", "school", "snow", "sunsmile", "sweater", "whitecloud"]
+list_body_top = [
+    "blazer", "blazerpink", "bluecloud", "cowcatsuit",
+    "downjacket", "school", "snow", "sunsmile", "sweater", "whitecloud"
+]
+# list_body_top = [
+#     "none"
+# ]
 list_body_bottom = [
     "chino", "chinobeige", "cowcatsuit", "jeans", "jeanschain", "jeanssky",
-    "khaki", "school", "shorts", "shortscotton"]
+    "khaki", "school", "shorts", "shortscotton"
+]
+# list_body_bottom = [
+#     "none"
+# ]
 
 metadata.generate_metadata(
     output_dir, nft_name, nft_symbol, nft_description, nft_image_url,
